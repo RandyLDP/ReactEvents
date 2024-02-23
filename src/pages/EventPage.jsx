@@ -8,6 +8,7 @@ export const EventPage = () => {
   const [editData, setEditData] = useState({});
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [usersData, setUsersData] = useState([]); // State to store users data
   const categoriesData = [
     { name: "sports", id: "1" },
     { name: "games", id: "2" },
@@ -21,6 +22,17 @@ export const EventPage = () => {
         const response = await fetch(`http://localhost:3000/events/${eventId}`);
         if (!response.ok) throw new Error("Failed to fetch event details");
         const eventData = await response.json();
+
+        // Fetch user details
+        const user = usersData.find((user) => user.id === eventData.createdBy);
+
+        if (!user) {
+          console.error("User not found for id:", eventData.createdBy);
+          throw new Error("User not found");
+        }
+
+        eventData.createdBy = user.name;
+
         setEvent(eventData);
         setEditData(eventData);
       } catch (error) {
@@ -29,8 +41,25 @@ export const EventPage = () => {
         setLoading(false);
       }
     };
+
     fetchEventDetails();
-  }, [eventId]);
+  }, [eventId, usersData]);
+
+  useEffect(() => {
+    // Fetch users data when the component mounts
+    const fetchUsersData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/users");
+        if (!response.ok) throw new Error("Failed to fetch users data");
+        const userData = await response.json();
+        setUsersData(userData);
+      } catch (error) {
+        console.error("Error fetching users data:", error);
+      }
+    };
+
+    fetchUsersData();
+  }, []); // Empty dependency array to ensure it runs only once when the component mounts
 
   const handleEdit = () => {
     setEditing(true);
@@ -66,6 +95,7 @@ export const EventPage = () => {
       // Show failure message
     }
   };
+
   const handleDelete = async () => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this event?"
@@ -147,14 +177,14 @@ export const EventPage = () => {
             placeholder="category"
             type="text"
             name="categoryIds"
-            value={editData.categoryIds || ""}
+            value={editData.categoryIds}
             onChange={handleInputChange}
           />
           <Input
             placeholder="Author"
             type="text"
             name="createdBy"
-            value={editData.createdBy || ""}
+            value={editData.createdBy}
             onChange={handleInputChange}
           />
           <Button colorScheme="green" onClick={handleSaveEdit}>
@@ -169,7 +199,7 @@ export const EventPage = () => {
           <Text>Starts:{new Date(event.startTime).toLocaleString()}</Text>
           <Text>Ends:{new Date(event.endTime).toLocaleString()}</Text>
           <Text>Category:{getCategoryNames()}</Text>
-          <Text>Author:{event.createdBy}</Text>
+          <Text>Author: {event.createdBy.toString()}</Text>
           <Stack direction="row" spacing={4}>
             <Button colorScheme="green" onClick={handleEdit}>
               Edit
