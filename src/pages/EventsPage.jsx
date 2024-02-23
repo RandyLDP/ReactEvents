@@ -55,7 +55,11 @@ export const EventsPage = () => {
   }, []);
 
   const getCategoryNames = (categoryIds) => {
-    if (!categoryIds || categoryIds.length === 0) {
+    if (
+      !categoryIds ||
+      !Array.isArray(categoryIds) ||
+      categoryIds.length === 0
+    ) {
       return "No Categories";
     }
 

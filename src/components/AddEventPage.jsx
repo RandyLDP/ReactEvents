@@ -10,14 +10,29 @@ const AddEventPage = () => {
     startTime: "",
     endTime: "",
     categoryIds: [],
+    image: "null",
   });
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, files } = e.target;
+
+    if (files) {
+      const imageUrl = new FileReader();
+
+      imageUrl.onloadend = () => {
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: imageUrl.result,
+        }));
+      };
+
+      imageUrl.readAsDataURL(files[0]);
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -36,6 +51,7 @@ const AddEventPage = () => {
         throw new Error("Failed to create event");
       }
       navigate("/");
+      alert("event created");
     } catch (error) {
       console.error("Error creating event:", error);
     }
@@ -85,7 +101,6 @@ const AddEventPage = () => {
           <input
             type="file"
             name="image"
-            value={formData.image}
             onChange={handleInputChange}
             multiple
           />

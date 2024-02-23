@@ -57,7 +57,7 @@ export const EventPage = () => {
         setEvent(editData);
         setEditing(false);
         // Show success message
-        console.log("Event updated successfully");
+        alert("Event updated successfully");
       } else {
         throw new Error("Failed to update event");
       }
@@ -116,36 +116,42 @@ export const EventPage = () => {
       {editing ? (
         <div>
           <Input
+            placeholder="title"
             type="text"
             name="title"
             value={editData.title || ""}
             onChange={handleInputChange}
           />
           <Input
+            placeholder="description"
             type="text"
             name="description"
             value={editData.description || ""}
             onChange={handleInputChange}
           />
           <Input
+            placeholder="end time"
             type="text"
             name="startTime"
             value={editData.startTime || ""}
             onChange={handleInputChange}
           />
           <Input
+            placeholder="start time"
             type="text"
             name="endTime"
             value={editData.endTime || ""}
             onChange={handleInputChange}
           />
           <Input
+            placeholder="category"
             type="text"
             name="categoryIds"
             value={editData.categoryIds || ""}
             onChange={handleInputChange}
           />
           <Input
+            placeholder="Author"
             type="text"
             name="createdBy"
             value={editData.createdBy || ""}
