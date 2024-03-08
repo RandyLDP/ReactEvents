@@ -1,21 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Flex,
+  HStack,
+  Heading,
+  Spacer,
+} from "@chakra-ui/react";
 export const Navigation = () => {
   return (
-    <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-        Menu
-      </MenuButton>
-      <MenuList>
-        <Link to="/">
-          <MenuItem>Event List</MenuItem>
-        </Link>
-        <Link to="/event/1">
-          <MenuItem>Event</MenuItem>
-        </Link>
-      </MenuList>
-    </Menu>
+    <Flex display="flex" alignItems="flex-end">
+      <Heading as="h2">Winc's Events</Heading>
+      <Spacer />
+      <HStack spacing="15px">
+        <Breadcrumb fontWeight="medium" fontSize="m" color="white">
+          <BreadcrumbItem>
+            <BreadcrumbLink borderBottom="1px solid blue" href="/">
+              Home
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink borderBottom="1px solid blue" href="/event/1">
+              Event
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+      </HStack>
+    </Flex>
   );
 };

@@ -105,8 +105,8 @@ export const EventsPage = () => {
 
   return (
     <Box>
-      <Heading>List of events</Heading>
-      <Button onClick={handleAddEvent}>Add Event</Button>
+      <Heading p="15px">List of events</Heading>
+      {/* <Button onClick={handleAddEvent}>Add Event</Button>
       <Input
         htmlSize={10}
         width="auto"
@@ -117,7 +117,7 @@ export const EventsPage = () => {
       />
 
       {/* Categories filter checkboxes */}
-      <SimpleGrid columns={[1, 2, 3]} spacing={4}>
+      {/* <SimpleGrid columns={[1, 2, 3]} spacing={4}>
         <Heading size="small">
           {categoriesData.map((category) => (
             <Checkbox
@@ -129,12 +129,12 @@ export const EventsPage = () => {
             </Checkbox>
           ))}
         </Heading>
-      </SimpleGrid>
+      </SimpleGrid> */}
 
-      <SimpleGrid minChildWidth="180px" spacing="40px">
+      <SimpleGrid colums={4} minChildWidth="250px" spacing="30px">
         {filteredEvents.map((event) => (
           <Box key={event.id}>
-            <Card maxW="sm">
+            <Card bg="#DCF2F1" maxW="sm">
               <CardHeader>
                 <Center>
                   <Image src={event.image} width="160px" height="140px" />
