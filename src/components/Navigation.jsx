@@ -20,12 +20,6 @@ export const Navigation = () => {
               Home
             </BreadcrumbLink>
           </BreadcrumbItem>
-
-          <BreadcrumbItem>
-            <BreadcrumbLink borderBottom="1px solid blue" href="/event/1">
-              Event
-            </BreadcrumbLink>
-          </BreadcrumbItem>
         </Breadcrumb>
       </HStack>
     </Flex>

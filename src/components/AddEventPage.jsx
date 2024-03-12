@@ -1,6 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, Box } from "@chakra-ui/react";
+import { Form, useNavigate } from "react-router-dom";
+import {
+  Button,
+  Box,
+  FormLabel,
+  FormHelperText,
+  FormControl,
+  Textarea,
+  Input,
+} from "@chakra-ui/react";
 
 const AddEventPage = () => {
   const navigate = useNavigate();
@@ -58,57 +66,72 @@ const AddEventPage = () => {
   };
 
   return (
-    <Box>
-      <form onSubmit={handleSubmit} method="post" encType="multipart/form-data">
-        <label>
-          Title
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Description
-          <input
-            type="text"
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Start Time
-          <input
-            type="datetime-local"
-            name="startTime"
-            value={formData.startTime}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          End Time
-          <input
-            type="datetime-local"
-            name="endTime"
-            value={formData.endTime}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Image
-          <input
+    <Box maxW="480px">
+      <Form onSubmit={handleSubmit} method="post" encType="multipart/form-data">
+        <FormControl isRequired mb="40px">
+          <FormLabel>
+            Title
+            <Input
+              placeholder="Event name"
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
+            />
+          </FormLabel>
+        </FormControl>
+        <FormControl>
+          <FormLabel>
+            Event Description
+            <Textarea
+              placeholder="Enter a description"
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+            />
+          </FormLabel>
+        </FormControl>
+        <FormControl mb="40px">
+          <FormLabel>
+            Starts
+            <Input
+              placeholder="Select Date and Time"
+              type="datetime-local"
+              name="startTime"
+              value={formData.startTime}
+              onChange={handleInputChange}
+            />
+          </FormLabel>
+        </FormControl>
+
+        <FormControl mb="40px">
+          <FormLabel>
+            Ends
+            <Input
+              placeholder="Select Date and Time"
+              type="datetime-local"
+              name="endTime"
+              value={formData.endTime}
+              onChange={handleInputChange}
+            />
+          </FormLabel>
+        </FormControl>
+
+        <FormControl mb="40px">
+          <FormLabel>Add Image</FormLabel>
+
+          <Input
+            colorScheme="blue"
             type="file"
             name="image"
             onChange={handleInputChange}
             multiple
           />
-        </label>
-        <Button colorScheme="green" type="submit">
+        </FormControl>
+        <Button colorScheme="blue" type="submit">
           Add Event
         </Button>
-      </form>
+      </Form>
     </Box>
   );
 };

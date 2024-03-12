@@ -13,6 +13,7 @@ import {
   CardBody,
   CardFooter,
   Input,
+  Divider,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -104,9 +105,13 @@ export const EventsPage = () => {
   });
 
   return (
-    <Box>
+    <>
+      {/* Heading for the list of events */}
       <Heading p="15px">List of events</Heading>
-      {/* <Button onClick={handleAddEvent}>Add Event</Button>
+
+      {/* Uncomment the following lines if needed */}
+      {/* 
+      <Button onClick={handleAddEvent}>Add Event</Button>
       <Input
         htmlSize={10}
         width="auto"
@@ -115,9 +120,11 @@ export const EventsPage = () => {
         _placeholder={{ opacity: 0.4, color: "inherit" }}
         onChange={(e) => setSearch(e.target.value)}
       />
+      */}
 
       {/* Categories filter checkboxes */}
-      {/* <SimpleGrid columns={[1, 2, 3]} spacing={4}>
+      {/* 
+      <SimpleGrid columns={[1, 2, 3]} spacing={4}>
         <Heading size="small">
           {categoriesData.map((category) => (
             <Checkbox
@@ -129,36 +136,43 @@ export const EventsPage = () => {
             </Checkbox>
           ))}
         </Heading>
-      </SimpleGrid> */}
+      </SimpleGrid>
+      */}
 
-      <SimpleGrid colums={4} minChildWidth="250px" spacing="30px">
+      {/* Displaying the events in a grid */}
+      <SimpleGrid columns={4} minChildWidth="300px" spacing="30px">
         {filteredEvents.map((event) => (
-          <Box key={event.id}>
-            <Card bg="#DCF2F1" maxW="sm">
-              <CardHeader>
-                <Center>
-                  <Image src={event.image} width="160px" height="140px" />
-                </Center>
-              </CardHeader>
-              <CardBody>
-                <Link to={`/event/${event.id}`}>
-                  <Heading size="md">{event.title}</Heading>
-                  <Text>{event.description}</Text>
-                  <Text>
-                    Start Time: {new Date(event.startTime).toLocaleString()}
-                  </Text>
-                  <Text>
-                    End Time: {new Date(event.endTime).toLocaleString()}
-                  </Text>
-                </Link>
-              </CardBody>
-              <CardFooter>
-                <Text>Categories:{getCategoryNames(event.categoryIds)}</Text>
-              </CardFooter>
-            </Card>
-          </Box>
+          <Card
+            key={event.id}
+            bg="#DCF2F1"
+            maxW="sm"
+            borderTop="8px"
+            borderColor="#7FC7D9"
+          >
+            <CardHeader>
+              <Center>
+                <Image src={event.image} width="80%" height="140px" />
+              </Center>
+            </CardHeader>
+            <CardBody>
+              <Link to={`/event/${event.id}`}>
+                <Heading size="md">{event.title}</Heading>
+                <Text>{event.description}</Text>
+                <Text>
+                  Start Time: {new Date(event.startTime).toLocaleString()}
+                </Text>
+                <Text>
+                  End Time: {new Date(event.endTime).toLocaleString()}
+                </Text>
+              </Link>
+            </CardBody>
+            <Divider color="#7FC7D9" />
+            <CardFooter>
+              <Text>Categories: {getCategoryNames(event.categoryIds)}</Text>
+            </CardFooter>
+          </Card>
         ))}
       </SimpleGrid>
-    </Box>
+    </>
   );
 };
