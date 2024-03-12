@@ -10,7 +10,7 @@ export const Root = () => {
       templateColumns="repeat(6,1fr)"
       bg="green.100"
       bgGradient="linear(to-t, #2564AE, #8CB9E2)"
-      height="100vh"
+      height="100%"
     >
       <GridItem
         as="aside"

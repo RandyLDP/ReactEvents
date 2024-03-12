@@ -2,17 +2,13 @@ import React, { useEffect, useState } from "react";
 import {
   Center,
   SimpleGrid,
-  Checkbox,
   Heading,
-  Box,
   Text,
   Image,
-  Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  Input,
   Divider,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
@@ -109,7 +105,6 @@ export const EventsPage = () => {
       {/* Heading for the list of events */}
       <Heading p="15px">List of events</Heading>
 
-      {/* Uncomment the following lines if needed */}
       {/* 
       <Button onClick={handleAddEvent}>Add Event</Button>
       <Input
