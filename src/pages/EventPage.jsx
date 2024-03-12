@@ -52,7 +52,6 @@ export const EventPage = () => {
   };
   const handleSaveEdit = async () => {
     try {
-      // Ensure editData.categoryIds is a string before splitting
       const categoriesArray =
         typeof editData.categoryIds === "string"
           ? editData.categoryIds.split(",").map((id) => id.trim())

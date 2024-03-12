@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   Center,
+  Checkbox,
   SimpleGrid,
   Heading,
   Text,
@@ -10,8 +11,10 @@ import {
   CardBody,
   CardFooter,
   Divider,
+  Box,
 } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import SearchEvent from "../components/SearchEvent";
 
 export const EventsPage = () => {
   const [eventList, setEventList] = useState([]);
@@ -22,7 +25,10 @@ export const EventsPage = () => {
     { name: "games", id: "2" },
     { name: "relaxation", id: "3" },
   ];
-  const navigate = useNavigate();
+
+  const handleSearchChange = (value) => {
+    setSearch(value);
+  };
 
   useEffect(() => {
     let ignore = false;
@@ -81,10 +87,6 @@ export const EventsPage = () => {
     });
   };
 
-  const handleAddEvent = () => {
-    navigate("/add-event");
-  };
-
   const filteredEvents = eventList.filter((event) => {
     const matchesSearch = event.title
       .toLowerCase()
@@ -101,28 +103,24 @@ export const EventsPage = () => {
   });
 
   return (
-    <>
-      {/* Heading for the list of events */}
-      <Heading p="15px">List of events</Heading>
+    <Box display="grid">
+      <Heading p="15px" color="whiteAlpha.800">
+        List of events
+      </Heading>
 
-      {/* 
-      <Button onClick={handleAddEvent}>Add Event</Button>
-      <Input
-        htmlSize={10}
-        width="auto"
-        color="tomato"
-        placeholder="Search Event"
-        _placeholder={{ opacity: 0.4, color: "inherit" }}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      */}
+      <SearchEvent onSearchChange={handleSearchChange} />
 
-      {/* Categories filter checkboxes */}
-      {/* 
-      <SimpleGrid columns={[1, 2, 3]} spacing={4}>
-        <Heading size="small">
+      <SimpleGrid
+        columns={[1, 2, 3]}
+        spacing={4}
+        display="flex "
+        p="20px"
+        alignItems="flex-end"
+      >
+        <Heading size="small" p="10px">
           {categoriesData.map((category) => (
             <Checkbox
+              pr="25px"
               key={category.id}
               isChecked={selectedCategories.includes(category.id)}
               onChange={() => handleCategorySelect(category.id)}
@@ -132,7 +130,6 @@ export const EventsPage = () => {
           ))}
         </Heading>
       </SimpleGrid>
-      */}
 
       {/* Displaying the events in a grid */}
       <SimpleGrid columns={4} minChildWidth="300px" spacing="30px">
@@ -168,6 +165,6 @@ export const EventsPage = () => {
           </Card>
         ))}
       </SimpleGrid>
-    </>
+    </Box>
   );
 };

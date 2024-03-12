@@ -6,6 +6,7 @@ import { EventsPage } from "./pages/EventsPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./components/Root";
 import AddEventPage from "./components/AddEventPage";
+import SearchEvent from "./components/SearchEvent";
 
 const router = createBrowserRouter([
   {
@@ -15,22 +16,23 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <EventsPage />,
-        //loader: postListLoader,
       },
       {
         path: "/event/:eventId",
         element: <EventPage />,
-
-        // action: addComment,
       },
       {
         path: "/add-event",
         element: <AddEventPage />,
       },
+      {
+        path: "/search",
+        element: <SearchEvent />,
+      },
     ],
   },
 ]);
-// @ts-ignore
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider>
