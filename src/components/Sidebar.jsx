@@ -1,8 +1,10 @@
-import { CalendarIcon, AddIcon, Search2Icon } from "@chakra-ui/icons";
+import React from "react";
 import { List, ListIcon, ListItem } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
+import { CalendarIcon, AddIcon } from "@chakra-ui/icons";
+import SearchEvent from "./SearchEvent";
 
-export default function Sidebar() {
+const Sidebar = ({ handleSearchChange }) => {
   return (
     <List color="white" fontSize="1.2em" spacing={4}>
       <ListItem>
@@ -17,12 +19,8 @@ export default function Sidebar() {
           New Event
         </NavLink>
       </ListItem>
-      <ListItem>
-        <NavLink to="/">
-          <ListIcon as={Search2Icon} />
-          Search
-        </NavLink>
-      </ListItem>
     </List>
   );
-}
+};
+
+export default Sidebar;

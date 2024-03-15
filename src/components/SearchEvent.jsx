@@ -1,19 +1,30 @@
 import React from "react";
-import { Input } from "@chakra-ui/react";
+import { InputGroup, InputLeftElement, Input, Icon } from "@chakra-ui/react";
+import { Search2Icon } from "@chakra-ui/icons";
+import { useState } from "react";
 
-const SearchEvent = ({ onSearchChange }) => {
+const SearchEvent = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    onSearch(value);
+  };
+
   return (
-    <>
+    <InputGroup>
+      <InputLeftElement pointerEvents="none">
+        <Icon as={Search2Icon} color="gray.300" />
+      </InputLeftElement>
+
       <Input
-        htmlSize={10}
-        padding="20px"
-        width="auto"
-        color="blue"
-        placeholder="Search Event"
-        _placeholder={{ opacity: 0.4, color: "inherit" }}
-        onChange={(e) => onSearchChange(e.target.value)}
+        type="text"
+        placeholder="Search events..."
+        value={searchTerm}
+        onChange={handleChange}
       />
-    </>
+    </InputGroup>
   );
 };
 

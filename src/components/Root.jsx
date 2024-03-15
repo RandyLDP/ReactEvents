@@ -1,6 +1,5 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-
 import { Grid, GridItem } from "@chakra-ui/react";
 import Sidebar from "./Sidebar";
 
